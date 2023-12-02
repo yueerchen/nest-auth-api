@@ -1,8 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-@Schema({
-  timestamps: true,
-})
+@Schema()
 export class User {
   @Prop({ unique: [true, 'Duplicate username entered'] })
   username: string;
@@ -13,8 +11,8 @@ export class User {
   @Prop({ default: 0 })
   loginAttempts: number;
 
-  @Prop()
-  lockUntil?: number;
+  @Prop({ type: [Number], default: [] })
+  loginAttemptsTimestamp: number[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -1,7 +1,7 @@
 // login.dto.ts
 import { IsNotEmpty, IsString } from 'class-validator';
 
-export class LoginDto {
+export class SignUpDto {
   @IsNotEmpty()
   @IsString()
   readonly username: string;
