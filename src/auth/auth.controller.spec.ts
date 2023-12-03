@@ -17,8 +17,8 @@ describe('AuthController', () => {
         AuthService,
         JwtService,
         {
-          provide: getModelToken('User'), // Use the actual model name here
-          useValue: {}, // You can mock the model as needed
+          provide: getModelToken('User'),
+          useValue: {},
         },
       ],
     }).compile();
