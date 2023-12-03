@@ -22,7 +22,7 @@ export class AuthService {
     this.limiterConsecutiveFailsByUsername = new RateLimiterRedis({
       storeClient: redisClient,
       keyPrefix: 'login_fail_consecutive_username',
-      points: maxConsecutiveFailsByUsername,
+      points: maxConsecutiveFailsByUsername, // allowed attempts to login
       duration: 60 * 5, // Store number for five minutes since first fail
       blockDuration: 60 * 15, // Block for 15 minutes
     });
@@ -46,6 +46,7 @@ export class AuthService {
     const { username, password } = loginDto;
     const rlResUsername =
       await this.limiterConsecutiveFailsByUsername.get(username);
+    // Check if cached failed attempts hit the limitation, yes then lock the user
     if (
       rlResUsername !== null &&
       rlResUsername.consumedPoints >= maxConsecutiveFailsByUsername
@@ -61,7 +62,7 @@ export class AuthService {
       // Check if user and password matched
       const isPasswordValid = await bcrypt.compare(password, user.password);
       if (!isPasswordValid) {
-        // Count failed attempts by Username + IP only for registered users
+        // Count failed attempts by Username
         await this.limiterConsecutiveFailsByUsername.consume(username);
         throw new UnauthorizedException('Login Failed, Invalid credentials');
       }
