@@ -24,6 +24,7 @@
 
 ## Description
 
+Node version: v16.20.1
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Installation
