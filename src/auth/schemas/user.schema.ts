@@ -7,12 +7,6 @@ export class User {
 
   @Prop()
   password: string;
-
-  @Prop({ default: 0 })
-  loginAttempts: number;
-
-  @Prop({ type: [Number], default: [] })
-  loginAttemptsTimestamp: number[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
