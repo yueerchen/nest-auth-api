@@ -7,6 +7,9 @@ export class User {
 
   @Prop()
   password: string;
+
+  @Prop({ default: false })
+  isLocked?: boolean;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
