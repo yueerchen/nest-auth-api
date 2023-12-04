@@ -25,6 +25,7 @@ This project implements a user authentication REST API using Nest.js, TypeScript
 ## Project Structure
 
 The project follows a standard Nest.js project structure:
+```plaintext
 nest-auth-api/
 |-- src/
 | |--dto/
@@ -52,6 +53,7 @@ nest-auth-api/
 |-- tsconfig.json
 |-- package.json
 |-- README.md
+```
 
 ## Requirements
 
