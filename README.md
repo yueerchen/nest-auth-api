@@ -1,74 +1,79 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Nest.js User Login REST API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A simple user login REST API implemented using Nest.js, TypeScript, MongoDB, and Docker.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Table of Contents
+- [Introduction](#introduction)
+- [Project Structure](#project-structure)
+- [Requirements](#requirements)
+- [Prerequisites](#prerequisites)
+- [Usage](#usage)
+- [Testing](#testing)
 
-## Description
+## Introduction
 
-Node version: v16.20.1
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This project implements a user authentication REST API using Nest.js, TypeScript, MongoDB, and Docker. It provides basic login functionality with JWT token generation, user lockout after failed attempts, and more.
 
-## Installation
+## Features
+
+- A user can login with a username and password (sign up was implemented for easily testing purpose)
+- JWT token generation on successful login
+- Return fail if username and password are not matched
+- Account lockout after three unsuccessful login attempts within 5 minutes
+- Return fail if a user is locked
+
+## Project Structure
+
+The project follows a standard Nest.js project structure:
+nest-auth-api/
+|-- src/
+| |--dto/
+| | |--login.dto.ts
+| | |--signup.dto.ts
+| |--schemas/
+| | |--user.schema.ts
+| |--test/
+| | |--integration/
+| | | |--auth.service.int-spec.ts
+| |-- auth/
+| |-- auth.module.ts
+| |-- auth.service.ts
+| |-- auth.controller.ts
+| |-- main.ts
+|-- mongodb/
+| |-- Dockerfile
+|-- redis/
+| |-- Dockerfile
+|-- Dockerfile
+|-- docker-compose.yml
+|-- .dockerignore
+|-- jest-int.json
+|-- .env
+|-- tsconfig.json
+|-- package.json
+|-- README.md
+
+## Requirements
+
+- Node (v16.20.1 or later)
+- npm or yarn
+- Docker
+
+## Usage
+
+Follow .example.env to fulfill the .env file and then run
 
 ```bash
-$ yarn install
+$ cd nestjs-user-auth
+$ docker-compose up --build
 ```
 
-## Running the app
+## Testing
 
 ```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
+# unit test
 $ yarn run test
 
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
+# integration test
+$ yarn run test:int
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
