@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  nest-app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+      - redis
+
+  mongodb:
+    container_name: mongodb
+    build: ./mongodb
+    ports:
+      - "27017:27017"
+    restart: always
+
+  redis:
+    container_name: redis
+    build: ./redis
+    ports:
+      - "6379:6379"
+    restart: always

@@ -18,7 +18,9 @@ export class AuthService {
     private userModal: Model<User>,
     private jwtService: JwtService,
   ) {
-    const redisClient = new Redis({ enableOfflineQueue: false });
+    const redisClient = new Redis(process.env.REDIS_URI, {
+      enableOfflineQueue: false,
+    });
     this.limiterConsecutiveFailsByUsername = new RateLimiterRedis({
       storeClient: redisClient,
       keyPrefix: 'login_fail_consecutive_username',
